@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "hubusca",
+    "slug": "hubusca",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "hubusca"
+}
