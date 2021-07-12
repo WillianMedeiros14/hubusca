@@ -12,7 +12,9 @@ import {
 } from '@expo-google-fonts/poppins';
 
 import theme from './src/global/styles/theme';
-import Home from './src/screens/Home';
+import { PostProvider } from './src/hooks/post';
+import Routes from './src/routes';
+
 
 export default function App() {
 
@@ -29,7 +31,9 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <PostProvider>
+        <Routes />
+      </PostProvider>
     </ThemeProvider>
   );
 }

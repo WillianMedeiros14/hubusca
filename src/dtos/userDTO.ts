@@ -1,4 +1,4 @@
-export interface userDTO {
+export interface UserDTO {
    id: number;
    name: string;
    username: string;
@@ -9,8 +9,8 @@ export interface userDTO {
         city: string;
         zipcode:string;
         geo: {
-        lat: string;
-        lng: string;
+            lat: string;
+            lng: string;
         }
     },
    phone: string;

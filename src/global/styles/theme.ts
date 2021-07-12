@@ -1,19 +1,17 @@
 export default {
     colors: {
-      header: '#51398E',
+      primary: '#51398E',
 
-      background: '#FFFFFF',
-      background_Post: '#06527B',
+      background:  '#F7F5FF',
+      backgroundModal: '#FFFAFA',
       
-      text: '#FFFFFF',
-      name: '#C2C2C2',
+      text: ' #000000',
+      user: '#6C6C6C',
 
-      load: '#AE0909',
-      teste: '#ff5'
-
-      
+      white: '#FEFEFE',
+      danger: '#E73F5D',
     },
-  
+    
     fonts: {
       regular: 'Poppins_400Regular',
       medium: 'Poppins_500Medium',
