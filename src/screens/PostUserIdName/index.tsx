@@ -19,8 +19,10 @@ import {
     ContainerInput,
     Main,
     PostList,
+    ContainerLoading
 } from './styles'
 import { api } from '../../services/api';
+import { Load } from '../../components/Load';
 
 type Params = {
     userId: number
@@ -35,6 +37,7 @@ export default function PostUserIdName(){
     const [openModal, setOpenModal] = useState(false);
    
     const [postsUserId, setPostsUserId] = useState<PostDTO[]>([]);
+    const [loading, setLoading] = useState(true);
     const [nameUserId, setNameUserId] = useState(''); 
     const [itemDelete, setItemDelete] = useState<PostDTO>({} as PostDTO);
 
@@ -42,6 +45,7 @@ export default function PostUserIdName(){
     const [listPost, setListPost] = useState<PostDTO[]>([]);
 
     async function fetchApiPostId(){
+       
         try {
             const responsePosts = await api.get(`/posts?userId=${userId}`);
             setPostsUserId(responsePosts.data);
@@ -51,7 +55,7 @@ export default function PostUserIdName(){
         } catch (error) {
             console.log(error);
         }finally{
-            //setLoading(false);
+            setLoading(false);
         }
     }
 
@@ -84,6 +88,7 @@ export default function PostUserIdName(){
 
    
     useEffect(() => {
+      
         setListPost(postsUserId);
         if (searchText === '') {
           setListPost(postsUserId);
@@ -95,6 +100,7 @@ export default function PostUserIdName(){
             )
           );
         }
+       
     }, [searchText, postsUserId]);
 
 
@@ -112,16 +118,23 @@ export default function PostUserIdName(){
 
 
             <Main>
-                <PostList
-                    data={listPost}
-                    keyExtractor={(item) => String(item.id) }
-                    renderItem={({ item }) => 
-                        <Post 
-                            data={item} 
-                            clean={() => handleRemovePost(item)} 
-                        />
-                    }
-                />
+                {
+                    loading ?
+                    <ContainerLoading>
+                        <Load /> 
+                    </ContainerLoading>
+                    :
+                    <PostList
+                        data={listPost}
+                        keyExtractor={(item) => String(item.id) }
+                        renderItem={({ item }) => 
+                            <Post 
+                                data={item} 
+                                clean={() => handleRemovePost(item)} 
+                            />
+                        }
+                    />
+                }
             </Main>
            
 
