@@ -15,7 +15,8 @@ import { usePostStorage } from '../../hooks/post';
 import {
     Container,
     Main,
-    PostList
+    PostList,
+    ContainerLoading
 } from './styles'
 
 interface PropsPostUser {
@@ -26,7 +27,7 @@ interface PropsPostUser {
 
 export default function Home(){
 
-    const { fetchApi, loading, posts } = usePostStorage();
+    const { fetchApi, loadingSearchDadosApi, posts } = usePostStorage();
 
     const navivigation = useNavigation();
 
@@ -43,8 +44,14 @@ export default function Home(){
            <HeaderPages title="Posts" />
            
            <Main>
+               
              
-                { loading ? <Load /> :
+                { 
+                    loadingSearchDadosApi ? 
+                        <ContainerLoading>
+                            <Load /> 
+                        </ContainerLoading>
+                    :
                     <PostList
                         data={posts}
                         keyExtractor={(item) => String(item.id) }

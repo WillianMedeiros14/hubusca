@@ -19,6 +19,7 @@ type PostContextData = {
     fetchApi: () => Promise<void>;
 
     loading: boolean;
+    loadingSearchDadosApi: boolean;
     loadingPostCrate: boolean;
     loadingRemovePost: boolean;
 
@@ -46,7 +47,9 @@ function PostProvider({ children }: PostProviderProps){
     const [posts, setPosts] = useState<PostDTO[]>([]);
     const [users, setUsers] = useState<UserDTO[]>([]);
 
+
     const [loading, setLoading] = useState(false);
+    const [loadingSearchDadosApi, setLoadingSearchDadosApi] = useState(true);
     const [loadingRemovePost, setLoadingRemovePost] = useState(false);
 
     const [newPost, setNewPost] = useState<PostDTO[]>([]);
@@ -72,7 +75,7 @@ function PostProvider({ children }: PostProviderProps){
         } catch (error) {
             console.log(error);
         }finally{
-            setLoading(false);
+            setLoadingSearchDadosApi(false);
         }
     }
 
@@ -147,6 +150,7 @@ function PostProvider({ children }: PostProviderProps){
             fetchApi,
 
             loading,
+            loadingSearchDadosApi,
             loadingPostCrate,
             loadingRemovePost,
 
