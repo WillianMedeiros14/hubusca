@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+
+
 
 import HeaderPages from '../../components/HeaderPages';
 import { InputSearch } from '../../components/InputSearch';
 import Post from '../../components/Post';
 import ModalDeletePost from '../../components/ModalDeletePost';
+import ModalConformationPost from '../../components/ModalConformationPost';
 
-import { api } from '../../services/api';
 import { PostDTO } from '../../dtos/postDTO';
 import { usePostStorage } from '../../hooks/post';
 
@@ -21,16 +24,17 @@ import {
 } from './styles'
 
 
-
 export default function PostUser(){
+    const { newPost, loadStoragePostPost, removePostUser } = usePostStorage();
+    
     const [openModal, setOpenModal] = useState(false);
+   
 
     const [itemDelete, setItemDelete] = useState<PostDTO>({} as PostDTO);
 
     const [searchText, setSearchText] = useState('')
     const [listPost, setListPost] = useState<PostDTO[]>([]);
 
-    const { newPost, loadStoragePostPost, removePostUser } = usePostStorage();
 
     function deletePost(){
         setOpenModal(false)
@@ -41,6 +45,7 @@ export default function PostUser(){
         setOpenModal(false)
     }
 
+    
     function handleRemovePost(item: PostDTO){
         setItemDelete(item);
         setOpenModal(true)
@@ -50,6 +55,11 @@ export default function PostUser(){
         loadStoragePostPost();
     }, []);
 
+    useFocusEffect(useCallback(() => {
+        loadStoragePostPost();
+    },[]));
+
+   
     useEffect(() => {
         setListPost(newPost);
         if (searchText === '') {
@@ -63,6 +73,7 @@ export default function PostUser(){
           );
         }
     }, [searchText, newPost]);
+
 
     function handleSeachText(item: string){
         setSearchText(item)

@@ -7,8 +7,8 @@ export function Load(){
 
     return (
         <ActivityIndicator
-            color={theme.colors.load}
-            size="large"
+            color={theme.colors.danger}
+            size="small"
             style={{ flex: 1}}
         />
     );

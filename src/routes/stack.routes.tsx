@@ -4,7 +4,8 @@ import { useTheme } from 'styled-components';
 
 import  InformationUser  from '../screens/InformationUser';
 import  Home  from '../screens/Home';
-
+import NewPost  from '../screens/NewPost';
+import PostUser  from '../screens/PostUser';
 
 
 const stackRoutes = createStackNavigator();
@@ -31,6 +32,16 @@ const AppRoutes = () => {
                 name="InformationUser"
                 component={InformationUser}
             />
+{/* 
+            <stackRoutes.Screen 
+                name="NewPost"
+                component={NewPost}
+            />
+
+            <stackRoutes.Screen 
+                name="PostUser"
+                component={PostUser}
+            /> */}
 
         </stackRoutes.Navigator>
 

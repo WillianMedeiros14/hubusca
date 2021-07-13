@@ -1,8 +1,10 @@
 import React from 'react';
 import { ModalProps } from 'react-native';
 
+import LottieView from 'lottie-react-native';
+
 import CleanSvg from '../../assets/cleanSvg.svg';
-import { ButtonModalDelete } from '../../components/ButtonModalDelete';
+import ConfirmationPost from '../../assets/confirmationPost.json';
 
 import {
     Container,
@@ -12,19 +14,16 @@ import {
     ButtonClose,
     TitleClose,
     Text,
-    ContainerButton
 } from './styles'
 
 type Props = ModalProps & {
     visible: boolean;
     onClose: () => void;
-    removePost: () => void;
 }
 
-export default function ModalDeletePost({
+export default function ModalConformationPost({
     visible, 
     onClose, 
-    removePost,
     ...rest
 } : Props){
    
@@ -43,28 +42,18 @@ export default function ModalDeletePost({
                             <TitleClose>X</TitleClose>
                         </ButtonClose>
                     </Header>
-                    <CleanSvg
-                        width={200}
-                        height={150}
-                    />
+
+                    <LottieView
+                        source={ConfirmationPost}
+                        style={{ height: 200}}
+                        autoPlay
+                    />  
 
                     <Text>
-                        Você tem certeza que deseja {`\n`}
-                        excluir esse post?
+                        O post foi criado {`\n`}
+                        com sucesso
                     </Text>
 
-                    <ContainerButton >
-                      
-                        <ButtonModalDelete 
-                            title="Sim" 
-                            onPress={removePost}
-                        />
-                        <ButtonModalDelete 
-                            active 
-                            title="Não" 
-                            onPress={onClose}
-                        />
-                    </ContainerButton>
                 </Background>
            </Main>
         </Container>

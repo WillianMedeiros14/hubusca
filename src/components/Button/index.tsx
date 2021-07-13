@@ -1,5 +1,7 @@
 import React from 'react';
 import { RectButtonProps } from 'react-native-gesture-handler';
+import { usePostStorage } from '../../hooks/post';
+import { Load } from '../Load';
 
 
 import {
@@ -10,13 +12,18 @@ import {
 
 type Props = RectButtonProps & {
     title: string;
+    enabledButton?: boolean;
 }
 
-export function Button({title, ...rest}: Props){
+export function Button({title, enabledButton, ...rest}: Props){
 
     return (
-        <Container {...rest}>
-            <Title>{title}</Title>
+        <Container enabled={!enabledButton} {...rest}>
+            {
+                enabledButton
+                ? <Load /> 
+                : <Title>{title}</Title>
+            }
         </Container>
     );
 }

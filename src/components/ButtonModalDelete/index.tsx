@@ -1,7 +1,6 @@
 import React from 'react';
 import { TouchableOpacityProps } from 'react-native';
 
-
 import {
     Container,
     Title
@@ -18,6 +17,7 @@ export function ButtonModalDelete({title, active, ...rest}: Props){
     return (
         <Container 
             active={active} 
+            activeOpacity={.7}
             {...rest}
         >
             <Title active={active}>{title}</Title>

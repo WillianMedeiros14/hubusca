@@ -55,7 +55,7 @@ const AuthRoutes = () => {
             /> 
 
             <AppTab.Screen 
-                name="Novo post"
+                name="NovoPost"
                 component={NewPost}
                 options={{
                     tabBarIcon:(({ size, color }) => (
@@ -69,7 +69,7 @@ const AuthRoutes = () => {
             /> 
 
             <AppTab.Screen 
-                name="Minhas postagens"
+                name="PostUser"
                 component={PostUser}
                 options={{
                     tabBarIcon:(({ size, color }) => (
