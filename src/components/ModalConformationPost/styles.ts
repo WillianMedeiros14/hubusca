@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.Modal `
-   
+   flex: 1;
 `;
 
 export const Main = styled.View `
@@ -10,7 +10,6 @@ export const Main = styled.View `
     align-items: center;
     justify-content: center;
     background-color:  rgba(0, 0, 0, 0.7);
-   
 `;
 
 export const Background = styled.View `

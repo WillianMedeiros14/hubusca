@@ -28,7 +28,7 @@ interface Props {
 export default function Post({data, onPresUserInformation, active, clean} : Props){
 
     const { users } = usePostStorage();
-    const [userNamePost, seUserNamePost] = useState('');
+   // const [userNamePost, seUserNamePost] = useState('');
 
     return (
         <Container>

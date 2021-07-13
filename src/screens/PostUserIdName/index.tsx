@@ -1,18 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useFocusEffect, useRoute } from '@react-navigation/native';
-
-
+import React, { useState, useEffect } from 'react';
+import { useRoute } from '@react-navigation/native';
 
 import HeaderPages from '../../components/HeaderPages';
 import { InputSearch } from '../../components/InputSearch';
 import Post from '../../components/Post';
-import ModalDeletePost from '../../components/ModalDeletePost';
-import ModalConformationPost from '../../components/ModalConformationPost';
 
 import { PostDTO } from '../../dtos/postDTO';
 import { usePostStorage } from '../../hooks/post';
-
-import EmptySvg from '../../assets/emptySvg.svg';
 
 import {
     Container,
@@ -33,13 +27,10 @@ export default function PostUserIdName(){
     const { userId } = route.params as  Params;
     
     const {  users } = usePostStorage();
-
-    const [openModal, setOpenModal] = useState(false);
    
     const [postsUserId, setPostsUserId] = useState<PostDTO[]>([]);
     const [loading, setLoading] = useState(true);
     const [nameUserId, setNameUserId] = useState(''); 
-    const [itemDelete, setItemDelete] = useState<PostDTO>({} as PostDTO);
 
     const [searchText, setSearchText] = useState('')
     const [listPost, setListPost] = useState<PostDTO[]>([]);
@@ -49,9 +40,6 @@ export default function PostUserIdName(){
         try {
             const responsePosts = await api.get(`/posts?userId=${userId}`);
             setPostsUserId(responsePosts.data);
-
-            console.log(postsUserId.length);           
-
         } catch (error) {
             console.log(error);
         }finally{
@@ -69,24 +57,7 @@ export default function PostUserIdName(){
         })
 
     }, [])
-
-
-    function deletePost(){
-        setOpenModal(false)
-        //removePostUser(itemDelete);
-    }
-
-    function handleCloseModal(){
-        setOpenModal(false)
-    }
-
     
-    function handleRemovePost(item: PostDTO){
-        setItemDelete(item);
-        setOpenModal(true)
-    }
-
-   
     useEffect(() => {
       
         setListPost(postsUserId);
@@ -130,20 +101,12 @@ export default function PostUserIdName(){
                         renderItem={({ item }) => 
                             <Post 
                                 data={item} 
-                                clean={() => handleRemovePost(item)} 
+                                active
                             />
                         }
                     />
                 }
             </Main>
-           
-
-            <ModalDeletePost 
-                visible={openModal} 
-                onClose={handleCloseModal}
-                removePost={deletePost}
-            />
-
         </Container>
     )
 }
