@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useRoute } from '@react-navigation/native';
 
 
 
@@ -19,26 +19,57 @@ import {
     ContainerInput,
     Main,
     PostList,
-    Empty,
-    TextEnpty
 } from './styles'
+import { api } from '../../services/api';
 
+type Params = {
+    userId: number
+}
 
-export default function PostUser(){
-    const { newPost, loadStoragePostPost, removePostUser } = usePostStorage();
+export default function PostUserIdName(){
+    const route = useRoute();
+    const { userId } = route.params as  Params;
     
+    const {  users } = usePostStorage();
+
     const [openModal, setOpenModal] = useState(false);
    
-
+    const [postsUserId, setPostsUserId] = useState<PostDTO[]>([]);
+    const [nameUserId, setNameUserId] = useState(''); 
     const [itemDelete, setItemDelete] = useState<PostDTO>({} as PostDTO);
 
     const [searchText, setSearchText] = useState('')
     const [listPost, setListPost] = useState<PostDTO[]>([]);
 
+    async function fetchApiPostId(){
+        try {
+            const responsePosts = await api.get(`/posts?userId=${userId}`);
+            setPostsUserId(responsePosts.data);
+
+            console.log(postsUserId.length);           
+
+        } catch (error) {
+            console.log(error);
+        }finally{
+            //setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchApiPostId();
+        
+        users.map((nameId) => {
+            if(nameId.id === userId){
+                setNameUserId(nameId.name);
+            }
+        })
+
+    }, [])
+
 
     function deletePost(){
         setOpenModal(false)
-        removePostUser(itemDelete);
+        //removePostUser(itemDelete);
     }
 
     function handleCloseModal(){
@@ -51,27 +82,20 @@ export default function PostUser(){
         setOpenModal(true)
     }
 
-    useEffect(() => {
-        loadStoragePostPost();
-    }, []);
-
-    useFocusEffect(useCallback(() => {
-        loadStoragePostPost();
-    },[]));
    
     useEffect(() => {
-        setListPost(newPost);
+        setListPost(postsUserId);
         if (searchText === '') {
-          setListPost(newPost);
+          setListPost(postsUserId);
         } else {
             setListPost(
-            newPost.filter(
+                postsUserId.filter(
               (item) =>
                 item.title.toLowerCase().indexOf(searchText.toLowerCase()) > -1
             )
           );
         }
-    }, [searchText, newPost]);
+    }, [searchText, postsUserId]);
 
 
     function handleSeachText(item: string){
@@ -80,40 +104,26 @@ export default function PostUser(){
 
     return (
         <Container>
-           <HeaderPages title="Posts do Usuário" />
+           <HeaderPages title={nameUserId} />
            
            <ContainerInput>
               <InputSearch search={handleSeachText} />
            </ContainerInput>
 
-            {
-                newPost.length === 0 ?
-                    <Empty>
-                        <EmptySvg
-                            width={279}
-                            height={218}
-                        />
 
-                        <TextEnpty>
-                            Você ainda não fez nenhum {'\n'}
-                            post ou excluiu todos!
-                        </TextEnpty>
-                    </Empty>
-                :
-
-                    <Main>
-                        <PostList
-                            data={listPost}
-                            keyExtractor={(item) => String(item.id) }
-                            renderItem={({ item }) => 
-                                <Post 
-                                    data={item} 
-                                    clean={() => handleRemovePost(item)} 
-                                />
-                            }
+            <Main>
+                <PostList
+                    data={listPost}
+                    keyExtractor={(item) => String(item.id) }
+                    renderItem={({ item }) => 
+                        <Post 
+                            data={item} 
+                            clean={() => handleRemovePost(item)} 
                         />
-                </Main>
-            }
+                    }
+                />
+            </Main>
+           
 
             <ModalDeletePost 
                 visible={openModal} 

@@ -20,7 +20,6 @@ export const Main = styled.ScrollView `
 
 export const ContainerUser = styled.View `
    margin-bottom: 20px;
-   
 `
 
 export const Title = styled.Text `
@@ -42,8 +41,8 @@ export const CatchPhrase = styled.Text `
 `
 
 export const ContainerButton = styled.View `
-    margin-top: 30px;
-    margin-bottom: ${getBottomSpace() + RFValue(34)}px;
+    margin-top: 20px;
+    margin-bottom: ${getBottomSpace() + RFValue(110)}px;
     padding-left: 25px;
     padding-right: 25px;
 `

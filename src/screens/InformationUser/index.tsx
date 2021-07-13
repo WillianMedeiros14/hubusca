@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import HeaderPages from '../../components/HeaderPages';
 import { Button } from '../../components/Button';
@@ -23,14 +23,19 @@ type Params = {
  }
 
 export default function InformationUser(){
-    
+    const navigation = useNavigation();
     const route = useRoute();
     const { userId } = route.params as  Params;
     
     const { users } = usePostStorage();
 
-    const [informationUser, setInformationUser] = useState<UserDTO[]>([]);
     const { name, username, email, address, phone, website, company } =  users[userId-1];
+
+
+    function handlePostUserIdName(){
+        navigation.navigate('PostUserIdName', { userId });
+    }
+
 
     return (
         <Container>
@@ -88,7 +93,7 @@ export default function InformationUser(){
            </Main>
 
             <ContainerButton>
-                <Button title="Posts do usuário" onPress={() => {}} />
+                <Button title="Posts do usuário" onPress={handlePostUserIdName} />
             </ContainerButton>
            
         </Container>

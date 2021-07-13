@@ -6,6 +6,7 @@ import  InformationUser  from '../screens/InformationUser';
 import  Home  from '../screens/Home';
 import NewPost  from '../screens/NewPost';
 import PostUser  from '../screens/PostUser';
+import PostUserIdName  from '../screens/PostUserIdName';
 
 
 const stackRoutes = createStackNavigator();
@@ -32,16 +33,16 @@ const AppRoutes = () => {
                 name="InformationUser"
                 component={InformationUser}
             />
-{/* 
+
             <stackRoutes.Screen 
                 name="NewPost"
                 component={NewPost}
             />
 
             <stackRoutes.Screen 
-                name="PostUser"
-                component={PostUser}
-            /> */}
+                name="PostUserIdName"
+                component={PostUserIdName}
+            />
 
         </stackRoutes.Navigator>
 
