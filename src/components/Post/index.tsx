@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState }  from 'react';
 
 import { PostDTO } from '../../dtos/postDTO';
 import { UserDTO } from '../../dtos/userDTO';
+
+import { usePostStorage } from '../../hooks/post';
 
 import {
     Container,
@@ -18,20 +20,32 @@ import {
 
 interface Props {
     data: PostDTO;
-    onPress?: () => void;
+    onPresUserInformation?: () => void;
     active?: boolean;
     clean?: () => void;
 }
 
-export default function Post({data, onPress, active, clean} : Props){
+export default function Post({data, onPresUserInformation, active, clean} : Props){
+
+    const { users } = usePostStorage();
+    const [userNamePost, seUserNamePost] = useState('');
 
     return (
         <Container>
             <Header>
                 <Title>{data.title}</Title>
-
-                <ButtonName onPress={onPress}>
-                    <Name>Willian</Name>
+    
+                <ButtonName onPress={onPresUserInformation}>
+                   <Name>
+                        {
+                            users.map((nameUser) => {
+                                if(nameUser.id === data.userId){
+                                   return nameUser.name
+                                }
+                            }) 
+                        }
+                      
+                   </Name>
                 </ButtonName>
             </Header>
 

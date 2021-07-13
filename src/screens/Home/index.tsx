@@ -26,20 +26,18 @@ interface PropsPostUser {
 
 export default function Home(){
 
-    const { fetchApi, loading, posts, newPost } = usePostStorage();
+    const { fetchApi, loading, posts } = usePostStorage();
 
     const navivigation = useNavigation();
 
     useEffect(() => {
         fetchApi();
     }, []);
-
    
-    function pageInformationUser(){
-        navivigation.navigate('InformationUser');
+    function pageInformationUser(userId: Number){
+        navivigation.navigate('InformationUser', { userId });
     }
     
-  
     return (
         <Container>
            <HeaderPages title="Posts" />
@@ -51,7 +49,11 @@ export default function Home(){
                         data={posts}
                         keyExtractor={(item) => String(item.id) }
                         renderItem={({ item }) => 
-                            <Post data={item} onPress={pageInformationUser}  active/>
+                            <Post 
+                                data={item} 
+                                onPresUserInformation={() => pageInformationUser(item.userId)}
+                                active
+                            />
                         }
                        
                     />

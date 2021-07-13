@@ -36,7 +36,7 @@ export const Content = styled.Text `
 `
 
 export const CatchPhrase = styled.Text `
-    font-size: ${RFValue(10)}px;
+    font-size: ${RFValue(13)}px;
     font-family: ${({ theme }) => theme.fonts.regular};
     color: ${({ theme }) => theme.colors.text};
 `

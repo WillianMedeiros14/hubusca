@@ -44,7 +44,6 @@ export default function PostUser(){
     function handleRemovePost(item: PostDTO){
         setItemDelete(item);
         setOpenModal(true)
-        
     }
 
     useEffect(() => {

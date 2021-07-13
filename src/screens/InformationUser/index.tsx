@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useRoute } from '@react-navigation/native';
 
 import HeaderPages from '../../components/HeaderPages';
 import { Button } from '../../components/Button';
+
+import { UserDTO } from '../../dtos/userDTO';
+import { usePostStorage } from '../../hooks/post';
 
 
 import {
@@ -14,10 +18,20 @@ import {
     ContainerButton
 } from './styles'
 
-
+type Params = {
+    userId: number
+ }
 
 export default function InformationUser(){
- 
+    
+    const route = useRoute();
+    const { userId } = route.params as  Params;
+    
+    const { users } = usePostStorage();
+
+    const [informationUser, setInformationUser] = useState<UserDTO[]>([]);
+    const { name, username, email, address, phone, website, company } =  users[userId-1];
+
     return (
         <Container>
            <HeaderPages title="Informações do usuário" />
@@ -25,38 +39,51 @@ export default function InformationUser(){
            <Main>
                 <ContainerUser>
                     <Title>Nome</Title>
-                    <Content>Willian Medeiros</Content>
+                    <Content>
+                        {name}
+                    </Content>
                 </ContainerUser>
 
                 <ContainerUser>
                     <Title>Username</Title>
-                    <Content>Medeiros</Content>
+                    <Content>
+                        {username}
+                    </Content>
                 </ContainerUser>
 
                 <ContainerUser>
                     <Title>Email</Title>
-                    <Content>incere@april.biz</Content>
+                    <Content>
+                        {email}
+                    </Content>
                 </ContainerUser>
 
                 <ContainerUser>
                     <Title>Endereço</Title>
-                    <Content>Rua: Kulas Light, apto 556, Gwenborough - AM, 92998-3873</Content>
+                    <Content>
+                        {`Rua: ${address.street}, ${address.suite}, ${address.city}, ${address.zipcode}`}
+                    </Content>
+                  
                 </ContainerUser>
 
                 <ContainerUser>
                     <Title>Telefone</Title>
-                    <Content>-770-736-8031 x56442</Content>
+                    <Content>
+                        {phone}
+                    </Content>
                 </ContainerUser>
 
                 <ContainerUser>
                     <Title>Website</Title>
-                    <Content>hildegard.org</Content>
+                    <Content>
+                        {website}
+                    </Content>
                 </ContainerUser>
 
                 <ContainerUser>
                     <Title>Empresa</Title>
-                    <Content>Romaguera-Cron</Content>
-                    <CatchPhrase>Multi-layred client-server</CatchPhrase>
+                    <Content>{company.name}</Content>
+                    <CatchPhrase>{company.catchPhrase}</CatchPhrase>
                 </ContainerUser>
            </Main>
 
