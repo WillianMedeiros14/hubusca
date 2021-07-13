@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { Feather } from '@expo/vector-icons';
-import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
+import { Entypo } from '@expo/vector-icons';
+import { RectButton, RectButtonProps, BorderlessButton } from 'react-native-gesture-handler';
 
 type Props = RectButtonProps;
 
@@ -48,16 +48,11 @@ export const Footer = styled.View `
    margin-top: 10px;
 `;
 
-export const ButtonCurtir = styled.TouchableOpacity `
+export const ButtonAction = styled(BorderlessButton) `
 
 `;
 
-export const Button = styled(RectButton)<Props> `
-
-`;
-
-export const Icon = styled(Feather) `
-   font-size: ${RFValue(25)}px;
+export const Icon = styled(Entypo) `
+   font-size: ${RFValue(30)}px;
    color: ${({ theme }) => theme.colors.primary};
-   
 `;

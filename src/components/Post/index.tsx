@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect }  from 'react';
 
 import { PostDTO } from '../../dtos/postDTO';
 import { UserDTO } from '../../dtos/userDTO';
@@ -13,8 +13,7 @@ import {
     Name,
     Content,
     Footer,
-    ButtonCurtir,
-    Button,
+    ButtonAction,
     Icon
 } from './styles'
 
@@ -23,12 +22,24 @@ interface Props {
     onPresUserInformation?: () => void;
     active?: boolean;
     clean?: () => void;
+    enjoyPost?: () => void;
 }
 
-export default function Post({data, onPresUserInformation, active, clean} : Props){
+export default function Post({data, onPresUserInformation, active, clean, enjoyPost} : Props){
+    const { users, enjoyPosts } = usePostStorage();
+    const [nameIcon, setNomeIcon] = useState('heart-outlined')
 
-    const { users } = usePostStorage();
-   // const [userNamePost, seUserNamePost] = useState('');
+    useEffect(() => {
+        enjoyPosts.map((enjoyId) => {
+            if(enjoyId.id === data.id){
+                if(enjoyId.enjoy === true) {
+                    setNomeIcon('heart')
+                } else {
+                    setNomeIcon('heart-outlined')
+                }
+            }
+        })
+    }, [enjoyPosts]);
 
     return (
         <Container>
@@ -56,17 +67,17 @@ export default function Post({data, onPresUserInformation, active, clean} : Prop
             <Footer>
                 {
                     active ? 
-                    <ButtonCurtir>
+                    <ButtonAction onPress={enjoyPost}>
                         <Icon
-                            name="heart"
+                            name={nameIcon}
                         />
-                    </ButtonCurtir>
+                    </ButtonAction>
                     :
-                    <Button onPress={clean}>
+                    <ButtonAction onPress={clean}>
                         <Icon
                             name="trash"
                         />
-                    </Button>
+                    </ButtonAction>
                 }
 
             </Footer>

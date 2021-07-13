@@ -9,9 +9,10 @@ import { Alert } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { api } from '../services/api';
 import { PostDTO } from '../dtos/postDTO';
 import { UserDTO } from '../dtos/userDTO';
-import { api } from '../services/api';
+import { EnjoyPostDTO } from '../dtos/enjoyPostDTO';
 
 type PostContextData = {
     posts: PostDTO[];
@@ -27,8 +28,10 @@ type PostContextData = {
     loadStoragePostPost: () => Promise<void>;
 
     newPost: PostDTO[];
-
     removePostUser: (item: PostDTO) => void;
+
+    enjoyPosts: EnjoyPostDTO[];
+    saveEnjoyPosts: (item: EnjoyPostDTO) => void;
 }
 
 type PostProviderProps = {
@@ -46,6 +49,7 @@ export const PostContext = createContext({} as PostContextData);
 function PostProvider({ children }: PostProviderProps){
     const [posts, setPosts] = useState<PostDTO[]>([]);
     const [users, setUsers] = useState<UserDTO[]>([]);
+    const [enjoyPosts, setEnjoyPosts] = useState<EnjoyPostDTO[]>([]);
 
 
     const [loadingSearchDadosApi, setLoadingSearchDadosApi] = useState(true);
@@ -58,6 +62,7 @@ function PostProvider({ children }: PostProviderProps){
     
     const CHAVE_STORAGE_POSTS = '@hubusca:postCreated';
     const CHAVE_STORAGE_IDPOST = '@hubusca:idPostCreated';
+    const CHAVE_STORAGE_ENJOYPOSTS = '@hubusca:enjoyPosts';
 
     useEffect(() => {
         loadStoragePostPost();
@@ -116,17 +121,22 @@ function PostProvider({ children }: PostProviderProps){
     async function loadStoragePostPost(){
         const storage = await AsyncStorage.getItem(CHAVE_STORAGE_POSTS);
         const storageId = await AsyncStorage.getItem(CHAVE_STORAGE_IDPOST);
+        const storageEnjoyPost = await AsyncStorage.getItem(CHAVE_STORAGE_ENJOYPOSTS);
        /// await AsyncStorage.removeItem(CHAVE_STORAGE_POSTS);
 
         if(storage){
             const data = JSON.parse(storage);
             setNewPost(data);
-           
         }
 
         if(storageId){
             const dataId = JSON.parse(storageId);
             setNewPostID(dataId);
+        }
+
+        if(storageEnjoyPost){
+            const dataEnjoy = JSON.parse(storageEnjoyPost);
+            setEnjoyPosts(dataEnjoy);
         }
         // console.log('Id do post criado POR ULTIMO: ' + newPostID)
         setLoadingSearchPostStorage(false);
@@ -141,6 +151,34 @@ function PostProvider({ children }: PostProviderProps){
         await AsyncStorage.setItem(CHAVE_STORAGE_POSTS, JSON.stringify(removeItem));
         setLoadingRemovePost(false)
     }
+
+    async function saveEnjoyPosts(item: EnjoyPostDTO){
+        const storageEnjoyPost = [
+            ...enjoyPosts,
+            item
+        ]
+
+        let alter = [...enjoyPosts];
+        let verifica = 0;
+        enjoyPosts.map((alterTask, index) => {
+            if(alterTask.id === item.id) {
+                alter[index].enjoy = !alterTask.enjoy;
+                setEnjoyPosts(alter);
+                verifica = 1;
+            }
+        })  
+
+        if(verifica === 1) {
+            await AsyncStorage.setItem(CHAVE_STORAGE_ENJOYPOSTS, JSON.stringify(alter));
+        }
+
+        if(verifica === 0) {
+            setEnjoyPosts(storageEnjoyPost);
+            await AsyncStorage.setItem(CHAVE_STORAGE_ENJOYPOSTS, JSON.stringify(storageEnjoyPost));
+        }
+                
+    }
+
 
     return (
         <PostContext.Provider value={{
@@ -157,8 +195,10 @@ function PostProvider({ children }: PostProviderProps){
             loadStoragePostPost,
 
             newPost,
+            removePostUser,
 
-            removePostUser
+            enjoyPosts,
+            saveEnjoyPosts
         }}>
             {children}
         </PostContext.Provider>

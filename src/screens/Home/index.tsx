@@ -18,6 +18,7 @@ import {
     PostList,
     ContainerLoading
 } from './styles'
+import { EnjoyPostDTO } from '../../dtos/enjoyPostDTO';
 
 interface PropsPostUser {
     post: PostDTO;
@@ -27,7 +28,7 @@ interface PropsPostUser {
 
 export default function Home(){
 
-    const { fetchApi, loadingSearchDadosApi, posts } = usePostStorage();
+    const { fetchApi, loadingSearchDadosApi, posts, saveEnjoyPosts } = usePostStorage();
 
     const navivigation = useNavigation();
 
@@ -37,6 +38,16 @@ export default function Home(){
    
     function pageInformationUser(userId: Number){
         navivigation.navigate('InformationUser', { userId });
+    }
+
+    function handleEnjoyPost(item: PostDTO){
+        const data ={
+            userId: item.userId,
+            id: item.id,
+            enjoy: true,
+        }
+
+        saveEnjoyPosts(data);
     }
     
     return (
@@ -59,6 +70,7 @@ export default function Home(){
                             <Post 
                                 data={item} 
                                 onPresUserInformation={() => pageInformationUser(item.userId)}
+                                enjoyPost={() => handleEnjoyPost(item)}
                                 active
                             />
                         }

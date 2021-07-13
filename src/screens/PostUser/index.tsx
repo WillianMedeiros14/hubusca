@@ -47,7 +47,6 @@ export default function PostUser(){
         setOpenModal(false)
     }
 
-    
     function handleRemovePost(item: PostDTO){
         setItemDelete(item);
         setOpenModal(true)
@@ -55,16 +54,18 @@ export default function PostUser(){
 
     useEffect(() => {
         loadStoragePostPost();
+       
     }, []);
 
     useFocusEffect(useCallback(() => {
         loadStoragePostPost();
+       
     },[]));
    
     useEffect(() => {
-        setListPost(newPost);
+        setListPost(newPost.reverse());
         if (searchText === '') {
-          setListPost(newPost);
+          setListPost(newPost.reverse());
         } else {
             setListPost(
             newPost.filter(

@@ -26,7 +26,7 @@ export default function PostUserIdName(){
     const route = useRoute();
     const { userId } = route.params as  Params;
     
-    const {  users } = usePostStorage();
+    const {  users, saveEnjoyPosts } = usePostStorage();
    
     const [postsUserId, setPostsUserId] = useState<PostDTO[]>([]);
     const [loading, setLoading] = useState(true);
@@ -36,7 +36,6 @@ export default function PostUserIdName(){
     const [listPost, setListPost] = useState<PostDTO[]>([]);
 
     async function fetchApiPostId(){
-       
         try {
             const responsePosts = await api.get(`/posts?userId=${userId}`);
             setPostsUserId(responsePosts.data);
@@ -49,17 +48,14 @@ export default function PostUserIdName(){
 
     useEffect(() => {
         fetchApiPostId();
-        
         users.map((nameId) => {
             if(nameId.id === userId){
                 setNameUserId(nameId.name);
             }
         })
-
     }, [])
     
     useEffect(() => {
-      
         setListPost(postsUserId);
         if (searchText === '') {
           setListPost(postsUserId);
@@ -78,6 +74,17 @@ export default function PostUserIdName(){
     function handleSeachText(item: string){
         setSearchText(item)
     }
+
+    function handleEnjoyPost(item: PostDTO){
+        const data ={
+            userId: item.userId,
+            id: item.id,
+            enjoy: true,
+        }
+
+        saveEnjoyPosts(data);
+    }
+    
 
     return (
         <Container>
@@ -101,6 +108,7 @@ export default function PostUserIdName(){
                         renderItem={({ item }) => 
                             <Post 
                                 data={item} 
+                                enjoyPost={() => handleEnjoyPost(item)}
                                 active
                             />
                         }
