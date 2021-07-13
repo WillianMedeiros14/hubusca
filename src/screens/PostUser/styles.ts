@@ -43,3 +43,11 @@ export const TextEnpty = styled.Text `
     color: ${({ theme }) => theme.colors.text};
     margin-top: 30px;
 `;
+
+export const ContainerLoading = styled.View `
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: ${getBottomSpace() + RFValue(85)}px;
+    background-color: ${({ theme }) => theme.colors.user};
+`;

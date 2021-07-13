@@ -20,12 +20,14 @@ import {
     Main,
     PostList,
     Empty,
-    TextEnpty
+    TextEnpty,
+    ContainerLoading
 } from './styles'
+import { Load } from '../../components/Load';
 
 
 export default function PostUser(){
-    const { newPost, loadStoragePostPost, removePostUser } = usePostStorage();
+    const { newPost, loadStoragePostPost, loadingSearchPostStorage, removePostUser } = usePostStorage();
     
     const [openModal, setOpenModal] = useState(false);
    
@@ -99,9 +101,11 @@ export default function PostUser(){
                             post ou excluiu todos!
                         </TextEnpty>
                     </Empty>
-                :
-
-                    <Main>
+                :                
+                <Main>
+                    {
+                        loadingSearchPostStorage 
+                        ? <Load /> :
                         <PostList
                             data={listPost}
                             keyExtractor={(item) => String(item.id) }
@@ -112,6 +116,10 @@ export default function PostUser(){
                                 />
                             }
                         />
+                    }
+                    
+                
+                    
                 </Main>
             }
 

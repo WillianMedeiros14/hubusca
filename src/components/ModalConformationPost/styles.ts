@@ -15,7 +15,7 @@ export const Main = styled.View `
 
 export const Background = styled.View `
     width: 85%;
-    height: 441px;
+    min-height: 441px;
     padding: 31px;
    
     border-radius: 8px;

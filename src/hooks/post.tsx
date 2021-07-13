@@ -18,10 +18,10 @@ type PostContextData = {
     users: UserDTO[];
     fetchApi: () => Promise<void>;
 
-    loading: boolean;
     loadingSearchDadosApi: boolean;
     loadingPostCrate: boolean;
     loadingRemovePost: boolean;
+    loadingSearchPostStorage: boolean;
 
     newPostStorage: (data: dataNewPost) => void;
     loadStoragePostPost: () => Promise<void>;
@@ -48,14 +48,14 @@ function PostProvider({ children }: PostProviderProps){
     const [users, setUsers] = useState<UserDTO[]>([]);
 
 
-    const [loading, setLoading] = useState(false);
     const [loadingSearchDadosApi, setLoadingSearchDadosApi] = useState(true);
     const [loadingRemovePost, setLoadingRemovePost] = useState(false);
-
+    const [loadingSearchPostStorage, setLoadingSearchPostStorage] = useState(true);
+    const [loadingPostCrate, setLoadingPostCreate] = useState(false);
+    
     const [newPost, setNewPost] = useState<PostDTO[]>([]);
     const [newPostID, setNewPostID] = useState(Number);
-    const [loadingPostCrate, setLoadingPostCreate] = useState(false);
-
+    
     const CHAVE_STORAGE_POSTS = '@hubusca:postCreated';
     const CHAVE_STORAGE_IDPOST = '@hubusca:idPostCreated';
 
@@ -87,7 +87,6 @@ function PostProvider({ children }: PostProviderProps){
             data
         }).then(() => {
             setLoadingPostCreate(false);
-            // setLoading(false)
         })
         .catch(() => {
             Alert.alert('Não foi possível criar o post.');
@@ -110,7 +109,7 @@ function PostProvider({ children }: PostProviderProps){
         setNewPostID(dataPost.id)
         await AsyncStorage.setItem(CHAVE_STORAGE_POSTS, JSON.stringify(storagePost));
         await AsyncStorage.setItem(CHAVE_STORAGE_IDPOST, JSON.stringify(dataPost.id));
-        //setLoading(false);  
+       
       
     }
 
@@ -122,7 +121,7 @@ function PostProvider({ children }: PostProviderProps){
         if(storage){
             const data = JSON.parse(storage);
             setNewPost(data);
-            // console.log(data)
+           
         }
 
         if(storageId){
@@ -130,7 +129,7 @@ function PostProvider({ children }: PostProviderProps){
             setNewPostID(dataId);
         }
         // console.log('Id do post criado POR ULTIMO: ' + newPostID)
-        setLoading(false)
+        setLoadingSearchPostStorage(false);
     }
 
     async function removePostUser(item: PostDTO) {
@@ -149,10 +148,10 @@ function PostProvider({ children }: PostProviderProps){
             users,
             fetchApi,
 
-            loading,
             loadingSearchDadosApi,
             loadingPostCrate,
             loadingRemovePost,
+            loadingSearchPostStorage,
 
             newPostStorage,
             loadStoragePostPost,
