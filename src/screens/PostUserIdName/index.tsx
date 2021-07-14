@@ -37,6 +37,8 @@ export default function PostUserIdName(){
     const [searchText, setSearchText] = useState('')
     const [listPost, setListPost] = useState<PostDTO[]>([]);
 
+    const [openKeyboard, setOpenkeyboard] = useState(false);
+
     async function fetchApiPostId(){
         try {
             const responsePosts = await api.get(`/posts?userId=${userId}`);
@@ -90,18 +92,22 @@ export default function PostUserIdName(){
     function goInformationUser(){
         navigation.goBack();
     }
-    
 
+    function actionKeyboard(status: boolean){
+        setOpenkeyboard(status);
+    }
+
+    
     return (
         <Container>
            <HeaderPages active goBack={goInformationUser} title={nameUserId} />
            
            <ContainerInput>
-              <InputSearch search={handleSeachText} />
+              <InputSearch actionKeyboard={actionKeyboard} search={handleSeachText} />
            </ContainerInput>
 
 
-            <Main>
+            <Main statusKeyboard={openKeyboard} >
                 {
                     loading ?
                     <ContainerLoading>

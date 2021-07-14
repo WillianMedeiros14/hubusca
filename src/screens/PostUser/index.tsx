@@ -32,6 +32,7 @@ export default function PostUser(){
     const [searchText, setSearchText] = useState('')
     const [listPost, setListPost] = useState<PostDTO[]>([]);
 
+    const [openKeyboard, setOpenkeyboard] = useState(false);
 
     function deletePost(){
         setOpenModal(false)
@@ -74,12 +75,17 @@ export default function PostUser(){
         setSearchText(item)
     }
 
+    function actionKeyboard(status: boolean){
+        setOpenkeyboard(status);
+    }
+
+
     return (
         <Container>
            <HeaderPages title="Posts do Usuário" />
            
            <ContainerInput>
-              <InputSearch search={handleSeachText} />
+              <InputSearch actionKeyboard={actionKeyboard} search={handleSeachText} />
            </ContainerInput>
 
             {
@@ -96,7 +102,7 @@ export default function PostUser(){
                         </TextEnpty>
                     </Empty>
                 :                
-                <Main>
+                <Main statusKeyboard={openKeyboard} >
                     {
                         loadingSearchPostStorage 
                         ? <Load /> :

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useCallback } from 'react';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
 
 import HeaderPages from '../../components/HeaderPages';
@@ -53,6 +53,7 @@ export default function NewPost(){
         setContent('');
         navigation.navigate("PostUser");
     }
+
 
     return (
         <Container>

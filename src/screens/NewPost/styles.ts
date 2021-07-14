@@ -18,8 +18,12 @@ export const Main = styled.ScrollView `
     padding-top: 38px;
     padding-left: 25px;
     padding-right: 25px;
-    border-radius: 5px;
+   
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     background-color: ${({ theme }) => theme.colors.white};
+
+ 
 `;
 
 export const Title = styled.Text `

@@ -14,7 +14,7 @@ export const Main = styled.View `
     margin-top: -50px;
     margin-left: 25px;
     margin-right: 25px;
-    margin-bottom: ${getBottomSpace() + RFValue(85)}px;
+    padding-bottom: ${getBottomSpace() + RFValue(85)}px;
 `;
 
 export const PostList = styled(FlatList as new () => FlatList<PostDTO>).attrs({

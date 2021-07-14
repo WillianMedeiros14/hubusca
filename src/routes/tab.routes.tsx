@@ -24,20 +24,22 @@ const AuthRoutes = () => {
             tabBarOptions={{
                 activeTintColor: theme.colors.primary,
                 inactiveTintColor: theme.colors.user,
-                labelPosition: 'beside-icon',
+                
                 showLabel: false,
+                keyboardHidesTabBar: true,
                 style: {
                     paddingVertical: Platform.OS === 'ios' ? 20 : 0,
                     height: 70,
                     position: 'absolute',
-                    bottom: 10,
+                    // bottom: 10,
                     left: 20,
                     right: 20,
-                  
                     backgroundColor: '#FFFF',
-                    borderRadius: 15,
+                    borderTopLeftRadius: 15 ,
+                    borderTopRightRadius: 15,
                     ...styles.shadow
                 },
+
             }}
         >
             <AppTab.Screen 
