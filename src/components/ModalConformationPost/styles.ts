@@ -16,7 +16,6 @@ export const Background = styled.View `
     width: 85%;
     min-height: 441px;
     padding: 31px;
-   
     border-radius: 8px;
     background-color:  ${({ theme }) => theme.colors.backgroundModal};
     align-items: center;
@@ -27,10 +26,8 @@ export const Background = styled.View `
 export const Header = styled.View `
     width: 100%;
     align-items: flex-end;
-  
     margin-bottom: -20px;
 `;
-
 
 export const ButtonClose = styled.TouchableOpacity `
     width: 30px;
@@ -38,7 +35,6 @@ export const ButtonClose = styled.TouchableOpacity `
     border-radius: 3px;
     align-items: center;
     justify-content: center;
-
 `;
 
 export const TitleClose = styled.Text `
@@ -46,7 +42,6 @@ export const TitleClose = styled.Text `
     font-family:  ${({ theme }) => theme.fonts.regular};
     text-align: center;
     color:  ${({ theme }) => theme.colors.danger};
-
 `;
 
 export const Text = styled.Text `

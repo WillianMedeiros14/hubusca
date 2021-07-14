@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-
 
 import HeaderPages from '../../components/HeaderPages';
 import Post from '../../components/Post';
 import { Load } from '../../components/Load';
 
-import { api } from '../../services/api';
 import { PostDTO } from '../../dtos/postDTO';
-import { UserDTO } from '../../dtos/userDTO';
 
 import { usePostStorage } from '../../hooks/post';
 
@@ -18,7 +15,6 @@ import {
     PostList,
     ContainerLoading
 } from './styles'
-import { EnjoyPostDTO } from '../../dtos/enjoyPostDTO';
 
 interface PropsPostUser {
     post: PostDTO;
@@ -27,10 +23,9 @@ interface PropsPostUser {
 
 
 export default function Home(){
+    const navivigation = useNavigation();
 
     const { fetchApi, loadingSearchDadosApi, posts, saveEnjoyPosts } = usePostStorage();
-
-    const navivigation = useNavigation();
 
     useEffect(() => {
         fetchApi();
@@ -55,8 +50,6 @@ export default function Home(){
            <HeaderPages title="Posts" />
            
            <Main>
-               
-             
                 { 
                     loadingSearchDadosApi ? 
                         <ContainerLoading>

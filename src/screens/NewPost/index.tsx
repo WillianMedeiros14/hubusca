@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-
 import { useTheme } from 'styled-components';
+
 import HeaderPages from '../../components/HeaderPages';
 import { Button } from '../../components/Button';
 import ModalConformationPost from '../../components/ModalConformationPost';
@@ -33,7 +33,6 @@ export default function NewPost(){
     const [openModalConfirmationPost, setOpenModalConfirmationPost] = useState(false);
 
     function addNewPost(){
-     
         if(title !== '' && content !== '') {
             const userIdPost = Math.floor(Math.random() * (10 - 1 + 1) + 1);
             const data = {
@@ -46,7 +45,6 @@ export default function NewPost(){
                 setOpenModalConfirmationPost(true);
             }
         }
-        
     }
     
     function handleCloseModalConfirmationPost(){

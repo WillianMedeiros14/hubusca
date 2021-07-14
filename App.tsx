@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
+import { StatusBar } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { ThemeProvider } from 'styled-components';
 import { useFonts } from 'expo-font';
@@ -32,6 +33,10 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <PostProvider>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={theme.colors.primary}
+        />
         <Routes />
       </PostProvider>
     </ThemeProvider>

@@ -13,7 +13,7 @@ export const Container = styled.View `
 
 
 export const ContainerInput = styled.View `
-    margin-top: -50px;
+    margin-top: ${RFValue(-56)}px;;
     margin-left: 25px;
     margin-right: 25px;
 `;
@@ -42,12 +42,4 @@ export const TextEnpty = styled.Text `
     font-family: ${({ theme }) => theme.fonts.medium};
     color: ${({ theme }) => theme.colors.text};
     margin-top: 30px;
-`;
-
-export const ContainerLoading = styled.View `
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: ${getBottomSpace() + RFValue(85)}px;
-    background-color: ${({ theme }) => theme.colors.user};
 `;

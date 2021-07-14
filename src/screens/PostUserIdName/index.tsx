@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 
 import HeaderPages from '../../components/HeaderPages';
 import { InputSearch } from '../../components/InputSearch';
@@ -26,6 +26,8 @@ export default function PostUserIdName(){
     const route = useRoute();
     const { userId } = route.params as  Params;
     
+    const navigation = useNavigation();
+
     const {  users, saveEnjoyPosts } = usePostStorage();
    
     const [postsUserId, setPostsUserId] = useState<PostDTO[]>([]);
@@ -84,11 +86,15 @@ export default function PostUserIdName(){
 
         saveEnjoyPosts(data);
     }
+
+    function goInformationUser(){
+        navigation.goBack();
+    }
     
 
     return (
         <Container>
-           <HeaderPages title={nameUserId} />
+           <HeaderPages active goBack={goInformationUser} title={nameUserId} />
            
            <ContainerInput>
               <InputSearch search={handleSeachText} />
@@ -109,6 +115,7 @@ export default function PostUserIdName(){
                             <Post 
                                 data={item} 
                                 enjoyPost={() => handleEnjoyPost(item)}
+                                onPresUserInformation={goInformationUser}
                                 active
                             />
                         }

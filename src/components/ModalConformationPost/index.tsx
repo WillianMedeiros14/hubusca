@@ -3,7 +3,6 @@ import { ModalProps } from 'react-native';
 
 import LottieView from 'lottie-react-native';
 
-import CleanSvg from '../../assets/cleanSvg.svg';
 import ConfirmationPost from '../../assets/confirmationPost.json';
 
 import {
@@ -53,7 +52,6 @@ export default function ModalConformationPost({
                         O post foi criado {`\n`}
                         com sucesso
                     </Text>
-
                 </Background>
            </Main>
         </Container>

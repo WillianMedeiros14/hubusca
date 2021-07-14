@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import { RectButtonProps } from 'react-native-gesture-handler';
-
 import {
     Container,
     Input,
@@ -15,7 +13,6 @@ type Props = {
 
 export function InputSearch({
     search,
-    
 }: Props){
 
     const [searchText, setSearchText] = useState('');
@@ -31,9 +28,7 @@ export function InputSearch({
                 value={searchText}
                 onChangeText={(t) => setSearchText(t)}
             />
-            <Button
-               
-            >
+            <Button >
                 <Icon
                     name="search-sharp"
                 />

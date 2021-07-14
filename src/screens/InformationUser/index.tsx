@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import HeaderPages from '../../components/HeaderPages';
 import { Button } from '../../components/Button';
 
-import { UserDTO } from '../../dtos/userDTO';
 import { usePostStorage } from '../../hooks/post';
-
 
 import {
     Container,
@@ -20,7 +18,7 @@ import {
 
 type Params = {
     userId: number
- }
+}
 
 export default function InformationUser(){
     const navigation = useNavigation();
@@ -31,15 +29,17 @@ export default function InformationUser(){
 
     const { name, username, email, address, phone, website, company } =  users[userId-1];
 
-
     function handlePostUserIdName(){
         navigation.navigate('PostUserIdName', { userId });
     }
 
+    function goBackHome(){
+        navigation.goBack();
+    }
 
     return (
         <Container>
-           <HeaderPages title="Informações do usuário" />
+           <HeaderPages active goBack={goBackHome} title="Informações do usuário" />
            
            <Main>
                 <ContainerUser>

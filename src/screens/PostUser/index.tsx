@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 
-
-
 import HeaderPages from '../../components/HeaderPages';
 import { InputSearch } from '../../components/InputSearch';
 import Post from '../../components/Post';
 import ModalDeletePost from '../../components/ModalDeletePost';
-import ModalConformationPost from '../../components/ModalConformationPost';
+import { Load } from '../../components/Load';
 
 import { PostDTO } from '../../dtos/postDTO';
 import { usePostStorage } from '../../hooks/post';
@@ -21,16 +19,13 @@ import {
     PostList,
     Empty,
     TextEnpty,
-    ContainerLoading
 } from './styles'
-import { Load } from '../../components/Load';
 
 
 export default function PostUser(){
     const { newPost, loadStoragePostPost, loadingSearchPostStorage, removePostUser } = usePostStorage();
     
     const [openModal, setOpenModal] = useState(false);
-   
 
     const [itemDelete, setItemDelete] = useState<PostDTO>({} as PostDTO);
 
@@ -54,12 +49,10 @@ export default function PostUser(){
 
     useEffect(() => {
         loadStoragePostPost();
-       
     }, []);
 
     useFocusEffect(useCallback(() => {
         loadStoragePostPost();
-       
     },[]));
    
     useEffect(() => {
@@ -117,10 +110,7 @@ export default function PostUser(){
                                 />
                             }
                         />
-                    }
-                    
-                
-                    
+                    }                    
                 </Main>
             }
 

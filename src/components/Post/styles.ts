@@ -1,19 +1,15 @@
 import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Entypo } from '@expo/vector-icons';
-import { RectButton, RectButtonProps, BorderlessButton } from 'react-native-gesture-handler';
-
-type Props = RectButtonProps;
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View `
    width: 100%;
    background-color: ${({ theme }) => theme.colors.white};
    margin-bottom: 20px;
-   
    padding: 17px;
    border-radius: 5px;
 `;
-
 
 export const Header = styled.View `
    width: 100%;
@@ -49,6 +45,10 @@ export const Footer = styled.View `
 `;
 
 export const ButtonAction = styled(BorderlessButton) `
+
+`;
+
+export const ButtonActionClean = styled.TouchableOpacity `
 
 `;
 

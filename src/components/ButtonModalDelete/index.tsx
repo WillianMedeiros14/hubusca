@@ -6,13 +6,16 @@ import {
     Title
 } from './styles';
 
-
 type Props = TouchableOpacityProps & {
     title: string;
     active?: boolean;
 }
 
-export function ButtonModalDelete({title, active, ...rest}: Props){
+export function ButtonModalDelete({
+    title, 
+    active, 
+    ...rest
+}: Props){
 
     return (
         <Container 

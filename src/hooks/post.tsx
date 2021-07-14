@@ -26,8 +26,8 @@ type PostContextData = {
 
     newPostStorage: (data: dataNewPost) => void;
     loadStoragePostPost: () => Promise<void>;
-
     newPost: PostDTO[];
+
     removePostUser: (item: PostDTO) => void;
 
     enjoyPosts: EnjoyPostDTO[];
@@ -74,9 +74,6 @@ function PostProvider({ children }: PostProviderProps){
             const responseUsers = await api.get('/users');
             setPosts(responsePosts.data);
             setUsers(responseUsers.data);
-
-            console.log(posts.length);           
-
         } catch (error) {
             console.log(error);
         }finally{
@@ -84,7 +81,6 @@ function PostProvider({ children }: PostProviderProps){
         }
     }
 
-    
     async function newPostStorage(data: dataNewPost){
         setLoadingPostCreate(true);
         
@@ -114,8 +110,6 @@ function PostProvider({ children }: PostProviderProps){
         setNewPostID(dataPost.id)
         await AsyncStorage.setItem(CHAVE_STORAGE_POSTS, JSON.stringify(storagePost));
         await AsyncStorage.setItem(CHAVE_STORAGE_IDPOST, JSON.stringify(dataPost.id));
-       
-      
     }
 
     async function loadStoragePostPost(){
@@ -138,7 +132,7 @@ function PostProvider({ children }: PostProviderProps){
             const dataEnjoy = JSON.parse(storageEnjoyPost);
             setEnjoyPosts(dataEnjoy);
         }
-        // console.log('Id do post criado POR ULTIMO: ' + newPostID)
+
         setLoadingSearchPostStorage(false);
     }
 
@@ -175,10 +169,8 @@ function PostProvider({ children }: PostProviderProps){
         if(verifica === 0) {
             setEnjoyPosts(storageEnjoyPost);
             await AsyncStorage.setItem(CHAVE_STORAGE_ENJOYPOSTS, JSON.stringify(storageEnjoyPost));
-        }
-                
+        }     
     }
-
 
     return (
         <PostContext.Provider value={{
@@ -193,8 +185,8 @@ function PostProvider({ children }: PostProviderProps){
 
             newPostStorage,
             loadStoragePostPost,
-
             newPost,
+
             removePostUser,
 
             enjoyPosts,

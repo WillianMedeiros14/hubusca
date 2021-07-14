@@ -17,7 +17,6 @@ export const Main = styled.View `
     margin-bottom: ${getBottomSpace() + RFValue(85)}px;
 `;
 
-
 export const PostList = styled(FlatList as new () => FlatList<PostDTO>).attrs({
     showsVerticalScrollIndicator: false,
 }) ``;
@@ -27,5 +26,4 @@ export const ContainerLoading = styled.View `
     align-items: center;
     justify-content: center;
     margin-bottom: ${getBottomSpace() + RFValue(85)}px;
-  
 `;

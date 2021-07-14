@@ -1,7 +1,6 @@
 import React, { useState, useEffect }  from 'react';
 
 import { PostDTO } from '../../dtos/postDTO';
-import { UserDTO } from '../../dtos/userDTO';
 
 import { usePostStorage } from '../../hooks/post';
 
@@ -14,6 +13,7 @@ import {
     Content,
     Footer,
     ButtonAction,
+    ButtonActionClean,
     Icon
 } from './styles'
 
@@ -25,7 +25,14 @@ interface Props {
     enjoyPost?: () => void;
 }
 
-export default function Post({data, onPresUserInformation, active, clean, enjoyPost} : Props){
+export default function Post({
+    data, 
+    onPresUserInformation, 
+    active, 
+    clean, 
+    enjoyPost
+} : Props){
+    
     const { users, enjoyPosts } = usePostStorage();
     const [nameIcon, setNomeIcon] = useState('heart-outlined')
 
@@ -73,13 +80,15 @@ export default function Post({data, onPresUserInformation, active, clean, enjoyP
                         />
                     </ButtonAction>
                     :
-                    <ButtonAction onPress={clean}>
+                    <ButtonActionClean
+                        onPress={clean}
+                        activeOpacity={0.7}
+                    >
                         <Icon
                             name="trash"
                         />
-                    </ButtonAction>
+                    </ButtonActionClean>
                 }
-
             </Footer>
         </Container>
     )
