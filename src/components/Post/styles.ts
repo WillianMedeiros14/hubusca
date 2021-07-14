@@ -42,6 +42,8 @@ export const Footer = styled.View `
    width: 100%;
    align-items: flex-end;
    margin-top: 10px;
+   flex-direction: row;
+   justify-content: space-between;
 `;
 
 export const ButtonAction = styled(BorderlessButton) `
@@ -56,3 +58,9 @@ export const Icon = styled(Entypo) `
    font-size: ${RFValue(30)}px;
    color: ${({ theme }) => theme.colors.primary};
 `;
+
+export const ViewEnjoyHome = styled.View `
+   width: 100%;
+   align-items: flex-end;
+`;
+

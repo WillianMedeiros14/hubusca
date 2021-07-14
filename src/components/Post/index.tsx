@@ -14,13 +14,15 @@ import {
     Footer,
     ButtonAction,
     ButtonActionClean,
-    Icon
+    Icon,
+    ViewEnjoyHome
 } from './styles'
 
 interface Props {
     data: PostDTO;
     onPresUserInformation?: () => void;
     active?: boolean;
+    activeHome?: boolean;
     clean?: () => void;
     enjoyPost?: () => void;
 }
@@ -29,6 +31,7 @@ export default function Post({
     data, 
     onPresUserInformation, 
     active, 
+    activeHome,
     clean, 
     enjoyPost
 } : Props){
@@ -62,7 +65,6 @@ export default function Post({
                                 }
                             }) 
                         }
-                      
                    </Name>
                 </ButtonName>
             </Header>
@@ -72,22 +74,33 @@ export default function Post({
             </Content>
 
             <Footer>
+                { activeHome &&
+                    <ViewEnjoyHome>
+                        <ButtonAction onPress={enjoyPost}>
+                            <Icon
+                                name={nameIcon}
+                            />
+                        </ButtonAction>
+                    </ViewEnjoyHome>
+                }
                 {
-                    active ? 
-                    <ButtonAction onPress={enjoyPost}>
-                        <Icon
-                            name={nameIcon}
-                        />
-                    </ButtonAction>
-                    :
-                    <ButtonActionClean
-                        onPress={clean}
-                        activeOpacity={0.7}
-                    >
-                        <Icon
-                            name="trash"
-                        />
-                    </ButtonActionClean>
+                    active && 
+                    <>
+                        <ButtonAction onPress={enjoyPost}>
+                            <Icon
+                                name={nameIcon}
+                            />
+                        </ButtonAction>
+                        
+                        <ButtonActionClean
+                            onPress={clean}
+                            activeOpacity={0.7}
+                        >
+                            <Icon
+                                name="trash"
+                            />
+                        </ButtonActionClean>
+                    </>
                 }
             </Footer>
         </Container>

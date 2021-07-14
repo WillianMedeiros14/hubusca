@@ -64,7 +64,7 @@ export default function Home(){
                                 data={item} 
                                 onPresUserInformation={() => pageInformationUser(item.userId)}
                                 enjoyPost={() => handleEnjoyPost(item)}
-                                active
+                                activeHome
                             />
                         }
                        

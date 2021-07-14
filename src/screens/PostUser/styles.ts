@@ -27,7 +27,7 @@ export const Main = styled.View<Props> `
     margin-right: 25px;
     
     ${({ statusKeyboard }) => statusKeyboard === false && css`
-      margin-bottom: ${getBottomSpace() + 85}px;
+      margin-bottom: ${getBottomSpace() + 82}px;
     `};
    
 `;

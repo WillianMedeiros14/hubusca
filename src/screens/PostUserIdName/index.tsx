@@ -122,7 +122,7 @@ export default function PostUserIdName(){
                                 data={item} 
                                 enjoyPost={() => handleEnjoyPost(item)}
                                 onPresUserInformation={goInformationUser}
-                                active
+                                activeHome
                             />
                         }
                     />

@@ -23,7 +23,7 @@ import {
 
 
 export default function PostUser(){
-    const { newPost, loadStoragePostPost, loadingSearchPostStorage, removePostUser } = usePostStorage();
+    const { newPost, loadStoragePostPost, loadingSearchPostStorage, removePostUser, saveEnjoyPosts } = usePostStorage();
     
     const [openModal, setOpenModal] = useState(false);
 
@@ -79,6 +79,15 @@ export default function PostUser(){
         setOpenkeyboard(status);
     }
 
+    function handleEnjoyPost(item: PostDTO){
+        const data ={
+            userId: item.userId,
+            id: item.id,
+            enjoy: true,
+        }
+
+        saveEnjoyPosts(data);
+    }
 
     return (
         <Container>
@@ -112,7 +121,9 @@ export default function PostUser(){
                             renderItem={({ item }) => 
                                 <Post 
                                     data={item} 
-                                    clean={() => handleRemovePost(item)} 
+                                    clean={() => handleRemovePost(item)}
+                                    enjoyPost={() => handleEnjoyPost(item)}
+                                    active
                                 />
                             }
                         />

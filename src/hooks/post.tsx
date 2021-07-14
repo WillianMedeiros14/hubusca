@@ -94,29 +94,34 @@ function PostProvider({ children }: PostProviderProps){
         })
 
         const { title, body, userId } = data;
+       
+
         const dataPost = {
-            id: newPostID + 1,
+            id: posts.length + newPostID + 1,
             title,
             body,
-            userId      
+            userId 
         }
 
         const storagePost = [
            ...newPost,
            dataPost
         ]
+
+        console.log("Id: " + dataPost.id)
         
         setNewPost(storagePost);
         setNewPostID(dataPost.id)
         await AsyncStorage.setItem(CHAVE_STORAGE_POSTS, JSON.stringify(storagePost));
         await AsyncStorage.setItem(CHAVE_STORAGE_IDPOST, JSON.stringify(dataPost.id));
+        //console.log(dataPost.id)
     }
 
     async function loadStoragePostPost(){
         const storage = await AsyncStorage.getItem(CHAVE_STORAGE_POSTS);
         const storageId = await AsyncStorage.getItem(CHAVE_STORAGE_IDPOST);
         const storageEnjoyPost = await AsyncStorage.getItem(CHAVE_STORAGE_ENJOYPOSTS);
-       /// await AsyncStorage.removeItem(CHAVE_STORAGE_POSTS);
+        //await AsyncStorage.removeItem(CHAVE_STORAGE_IDPOST);
 
         if(storage){
             const data = JSON.parse(storage);
@@ -127,7 +132,7 @@ function PostProvider({ children }: PostProviderProps){
             const dataId = JSON.parse(storageId);
             setNewPostID(dataId);
         }
-
+       
         if(storageEnjoyPost){
             const dataEnjoy = JSON.parse(storageEnjoyPost);
             setEnjoyPosts(dataEnjoy);
