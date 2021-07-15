@@ -2,10 +2,6 @@ import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 
-interface Props {
-    active?: boolean;
-}
-
 export const Container = styled.View `
     flex: 1;
     background-color: ${({ theme }) => theme.colors.background};
@@ -18,12 +14,9 @@ export const Main = styled.ScrollView `
     padding-top: 38px;
     padding-left: 25px;
     padding-right: 25px;
-   
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     background-color: ${({ theme }) => theme.colors.white};
-
- 
 `;
 
 export const Title = styled.Text `
@@ -43,7 +36,6 @@ export const Input = styled.TextInput `
     border-width: 1px;
     border-color: ${({ theme }) => theme.colors.primary};
 `;
-
 
 export const AreaText = styled.View `
     min-height: ${RFValue(130)}px;

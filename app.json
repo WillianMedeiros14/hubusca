@@ -1,14 +1,21 @@
 {
   "expo": {
-    "name": "hubusca",
+    "name": "HUBusca",
     "slug": "hubusca",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
     "assetBundlePatterns": [
       "**/*"
     ],
     "splash": {
       "image": "./assets/splash.png",
+      "resizeMode": "contain",
       "backgroundColor": "#51398E"
+    },
+    "android": {
+      "package": "com.willianmedeiros.hubusca",
+      "versionCode": 1
     }
   },
   "name": "hubusca"

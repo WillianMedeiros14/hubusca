@@ -24,9 +24,7 @@ export const Goback = styled.View `
    align-items: flex-end;
 `
 
-export const ButtonGoBack = styled(BorderlessButton) `
-
-`
+export const ButtonGoBack = styled(BorderlessButton) ``;
 
 export const Icon = styled(Ionicons) `
    font-size: ${RFValue(35)}px;

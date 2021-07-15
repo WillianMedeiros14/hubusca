@@ -30,12 +30,9 @@ export default function PostUser(){
     const navigation = useNavigation();
 
     const [openModal, setOpenModal] = useState(false);
-
     const [itemDelete, setItemDelete] = useState<PostDTO>({} as PostDTO);
-
     const [searchText, setSearchText] = useState('')
     const [listPost, setListPost] = useState<PostDTO[]>([]);
-
     const [openKeyboard, setOpenkeyboard] = useState(false);
 
     function deletePost(){
@@ -44,12 +41,12 @@ export default function PostUser(){
     }
 
     function handleCloseModal(){
-        setOpenModal(false)
+        setOpenModal(false);
     }
 
     function handleRemovePost(item: PostDTO){
         setItemDelete(item);
-        setOpenModal(true)
+        setOpenModal(true);
     }
 
     useEffect(() => {
@@ -75,7 +72,7 @@ export default function PostUser(){
 
 
     function handleSeachText(item: string){
-        setSearchText(item)
+        setSearchText(item);
     }
 
     function actionKeyboard(status: boolean){

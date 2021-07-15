@@ -27,20 +27,19 @@ export function InputSearch({
         Keyboard.addListener("keyboardDidShow", _keyboardDidShow);
         Keyboard.addListener("keyboardDidHide", _keyboardDidHide);
     
-        // cleanup function
         return () => {
           Keyboard.removeListener("keyboardDidShow", _keyboardDidShow);
           Keyboard.removeListener("keyboardDidHide", _keyboardDidHide);
         };
-      }, []);
+    }, []);
 
-      function _keyboardDidShow(){
+    function _keyboardDidShow(){
         actionKeyboard(true)
-      }
+    }
 
-      function _keyboardDidHide(){
+    function _keyboardDidHide(){
         actionKeyboard(false)
-      }
+    }
 
 
     return (

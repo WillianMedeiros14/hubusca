@@ -47,13 +47,9 @@ export const Footer = styled.View `
    justify-content: space-between;
 `;
 
-export const ButtonAction = styled(BorderlessButton) `
+export const ButtonAction = styled(BorderlessButton) ``;
 
-`;
-
-export const ButtonActionClean = styled.TouchableOpacity `
-
-`;
+export const ButtonActionClean = styled.TouchableOpacity ``;
 
 export const Icon = styled(Entypo) `
    font-size: ${RFValue(30)}px;

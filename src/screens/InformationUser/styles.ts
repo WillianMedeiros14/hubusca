@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { getBottomSpace } from 'react-native-iphone-x-helper';
 
 export const Container = styled.View `
     flex: 1;
@@ -14,7 +14,6 @@ export const Main = styled.ScrollView `
     margin-right: 25px;
     border-radius: 5px;
     background-color: ${({ theme }) => theme.colors.white};
-
     padding: 17px;
 `;
 

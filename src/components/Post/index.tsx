@@ -21,18 +21,18 @@ import {
 
 interface Props {
     data: PostDTO;
-    onPresUserInformation?: () => void;
     active?: boolean;
     activeHome?: boolean;
+    onPresUserInformation?: () => void;
     clean?: () => void;
     enjoyPost?: () => void;
 }
 
 export default function Post({
     data, 
-    onPresUserInformation, 
     active, 
     activeHome,
+    onPresUserInformation, 
     clean, 
     enjoyPost
 } : Props){

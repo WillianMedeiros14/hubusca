@@ -6,7 +6,6 @@ import React, {
     useEffect,
 } from 'react';
 import { Alert } from 'react-native';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { api } from '../services/api';
@@ -50,7 +49,6 @@ function PostProvider({ children }: PostProviderProps){
     const [posts, setPosts] = useState<PostDTO[]>([]);
     const [users, setUsers] = useState<UserDTO[]>([]);
     const [enjoyPosts, setEnjoyPosts] = useState<EnjoyPostDTO[]>([]);
-
 
     const [loadingSearchDadosApi, setLoadingSearchDadosApi] = useState(true);
     const [loadingRemovePost, setLoadingRemovePost] = useState(false);
@@ -101,8 +99,6 @@ function PostProvider({ children }: PostProviderProps){
                ...newPost,
                dataPost
             ]
-    
-            console.log("Id: " + dataPost.id)
             
             setNewPost(storagePost);
             setNewPostID(dataPost.id)
@@ -114,16 +110,14 @@ function PostProvider({ children }: PostProviderProps){
         .catch(() => {
             Alert.alert('Não foi possível criar o post.');
         })
-
+        
+        setLoadingPostCreate(false);
     }
 
     async function loadStoragePostPost(){
         const storage = await AsyncStorage.getItem(CHAVE_STORAGE_POSTS);
         const storageId = await AsyncStorage.getItem(CHAVE_STORAGE_IDPOST);
         const storageEnjoyPost = await AsyncStorage.getItem(CHAVE_STORAGE_ENJOYPOSTS);
-        // await AsyncStorage.removeItem(CHAVE_STORAGE_POSTS);
-        // await AsyncStorage.removeItem(CHAVE_STORAGE_IDPOST);
-        // await AsyncStorage.removeItem(CHAVE_STORAGE_ENJOYPOSTS);
 
         if(storage){
             const data = await JSON.parse(storage);
@@ -150,7 +144,7 @@ function PostProvider({ children }: PostProviderProps){
         )
         setNewPost(removeItem);
         await AsyncStorage.setItem(CHAVE_STORAGE_POSTS, JSON.stringify(removeItem));
-        setLoadingRemovePost(false)
+        setLoadingRemovePost(false);
     }
 
     async function saveEnjoyPosts(item: EnjoyPostDTO){
