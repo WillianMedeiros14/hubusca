@@ -4,11 +4,12 @@ import { Entypo } from '@expo/vector-icons';
 import { BorderlessButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View `
-   width: 100%;
+   width: 99.5%;
    background-color: ${({ theme }) => theme.colors.white};
    margin-bottom: 20px;
    padding: 17px;
    border-radius: 5px;
+   margin-right: 1px;
 `;
 
 export const Header = styled.View `

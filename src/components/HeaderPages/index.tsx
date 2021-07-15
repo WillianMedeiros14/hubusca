@@ -33,7 +33,7 @@ export default function HeaderPages({
                 }
             </Goback>
            <Title>
-               {title} 
+               {title}
            </Title>
         </Container>
     )

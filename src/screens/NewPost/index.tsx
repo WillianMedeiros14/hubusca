@@ -25,7 +25,7 @@ export default function NewPost(){
     const theme = useTheme();
     const navigation = useNavigation();
   
-    const { newPostStorage, loadingPostCrate } = usePostStorage();
+    const { newPostStorage, loadingPostCrate, loadStoragePostPost } = usePostStorage();
 
     const[title, setTitle] = useState('')
     const[content, setContent] = useState('')
@@ -54,6 +54,9 @@ export default function NewPost(){
         navigation.navigate("PostUser");
     }
 
+    useFocusEffect(useCallback(() => {
+        loadStoragePostPost();
+    },[]));
 
     return (
         <Container>

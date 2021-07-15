@@ -1,4 +1,5 @@
 import React, { useState, useEffect }  from 'react';
+import { StyleSheet } from 'react-native';
 
 import { PostDTO } from '../../dtos/postDTO';
 
@@ -52,7 +53,7 @@ export default function Post({
     }, [enjoyPosts]);
 
     return (
-        <Container>
+        <Container style={styles.shadow}>
             <Header>
                 <Title>{data.title}</Title>
     
@@ -67,6 +68,7 @@ export default function Post({
                         }
                    </Name>
                 </ButtonName>
+                
             </Header>
 
             <Content>
@@ -106,3 +108,16 @@ export default function Post({
         </Container>
     )
 }
+
+export const styles = StyleSheet.create({
+    shadow: {
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.5,
+        elevation: 2
+    }
+})

@@ -12,6 +12,8 @@ import { usePostStorage } from '../../hooks/post';
 
 import EmptySvg from '../../assets/emptySvg.svg';
 
+import { useNavigation } from '@react-navigation/native';
+
 import {
     Container,
     ContainerInput,
@@ -25,6 +27,8 @@ import {
 export default function PostUser(){
     const { newPost, loadStoragePostPost, loadingSearchPostStorage, removePostUser, saveEnjoyPosts } = usePostStorage();
     
+    const navigation = useNavigation();
+
     const [openModal, setOpenModal] = useState(false);
 
     const [itemDelete, setItemDelete] = useState<PostDTO>({} as PostDTO);
@@ -55,11 +59,10 @@ export default function PostUser(){
     useFocusEffect(useCallback(() => {
         loadStoragePostPost();
     },[]));
-   
+    
     useEffect(() => {
-        setListPost(newPost.reverse());
         if (searchText === '') {
-          setListPost(newPost.reverse());
+          setListPost(newPost);
         } else {
             setListPost(
             newPost.filter(
@@ -87,6 +90,10 @@ export default function PostUser(){
         }
 
         saveEnjoyPosts(data);
+    }
+
+    function pageInformationUser(userId: Number){
+        navigation.navigate('InformationUser', { userId });
     }
 
     return (
@@ -123,6 +130,7 @@ export default function PostUser(){
                                     data={item} 
                                     clean={() => handleRemovePost(item)}
                                     enjoyPost={() => handleEnjoyPost(item)}
+                                    onPresUserInformation={() => pageInformationUser(item.userId)}
                                     active
                                 />
                             }

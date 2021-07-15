@@ -5,7 +5,6 @@ import { useTheme } from 'styled-components';
 import  InformationUser  from '../screens/InformationUser';
 import  Home  from '../screens/Home';
 import NewPost  from '../screens/NewPost';
-import PostUser  from '../screens/PostUser';
 import PostUserIdName  from '../screens/PostUserIdName';
 
 

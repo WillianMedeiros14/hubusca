@@ -19,6 +19,7 @@ export const Main = styled.View `
 
 export const PostList = styled(FlatList as new () => FlatList<PostDTO>).attrs({
     showsVerticalScrollIndicator: false,
+    
 }) ``;
 
 export const ContainerLoading = styled.View `

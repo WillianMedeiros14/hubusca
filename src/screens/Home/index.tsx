@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useCallback } from 'react';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import HeaderPages from '../../components/HeaderPages';
 import Post from '../../components/Post';
@@ -25,11 +25,9 @@ interface PropsPostUser {
 export default function Home(){
     const navivigation = useNavigation();
 
-    const { fetchApi, loadingSearchDadosApi, posts, saveEnjoyPosts } = usePostStorage();
+    const { fetchApi, loadStoragePostPost, loadingSearchDadosApi, posts, saveEnjoyPosts } = usePostStorage();
 
-    useEffect(() => {
-        fetchApi();
-    }, []);
+  
    
     function pageInformationUser(userId: Number){
         navivigation.navigate('InformationUser', { userId });
@@ -44,6 +42,20 @@ export default function Home(){
 
         saveEnjoyPosts(data);
     }
+
+    // useEffect(() => {
+    //     fetchApi();
+    // }, []);
+
+    useEffect(() => {
+        fetchApi();
+        loadStoragePostPost();
+    }, []);
+
+    useFocusEffect(useCallback(() => {
+        fetchApi();
+        loadStoragePostPost();
+    },[]));
     
     return (
         <Container>
